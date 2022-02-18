@@ -1,11 +1,21 @@
-.main{
-  background-color: aquamarine;
-  margin: 100px 50px 100px 0;
-  width: 1200px;
+.settings {
+  background-color: #323c4e;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 15%;
 }
 
-.settings {
-  background-color: maroon;
-  margin: 100px 50px 100px 0;
-  width: 200px;
+.game{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 85%;
+  margin-right: 5px;
+}
+
+.main-custom{
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 50px 250px;
+  border-radius: 5vh;
+  height: 80vh;
 }

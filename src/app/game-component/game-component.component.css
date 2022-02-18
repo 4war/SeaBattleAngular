@@ -1,0 +1,30 @@
+.battlefield{
+  display: flex;
+  flex-flow: row nowrap;
+  height: 80%;
+  position: relative;
+}
+
+.battlefield-user{
+  background-color: #151f32;
+}
+
+.battlefield-enemy{
+  background-color: #e44749;
+}
+
+.state{
+  display: flex;
+  flex-flow: row nowrap;
+  height:20%;
+}
+
+.state-user{
+  background-color: #2f466f;
+}
+
+.state-enemy{
+  background-color: #ff7578;
+}
+
+

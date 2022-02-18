@@ -1,0 +1,11 @@
+.main{
+  background-color: aquamarine;
+  margin: 100px 50px 100px 0;
+  width: 1200px;
+}
+
+.settings {
+  background-color: maroon;
+  margin: 100px 50px 100px 0;
+  width: 200px;
+}

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Cell} from "../../Models/Cell";
+import {States} from "../../Models/States";
+const size = 10;
 
 @Component({
   selector: 'app-ai-battle-field-component',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AiBattleFieldComponentComponent implements OnInit {
 
-  constructor() { }
+  public cells: Cell[][];
+
+  constructor() {
+    this.cells = this.fillCells();
+  }
 
   ngOnInit(): void {
+  }
+
+  fillCells(): Cell[][] {
+    let result: Cell[][] = [];
+    for (let x = 0; x < size; x++) {
+      result[x] = [];
+      for (let y = 0; y < size; y++) {
+        let cell = new Cell();
+        cell.X = x;
+        cell.Y = y;
+        cell.State = States.Clear;
+        result[x][y] = cell;
+      }
+    }
+
+    return result;
   }
 
 }

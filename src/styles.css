@@ -5,3 +5,26 @@ body{
   background-color: #0d1421;
 }
 
+.center-custom{
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+}
+
+.table-custom{
+  width: 90%;
+  height: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cell-custom{
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-decoration: none;
+}

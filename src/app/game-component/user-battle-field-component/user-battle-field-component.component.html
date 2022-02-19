@@ -1,1 +1,9 @@
-<p>user-battle-field-component works!</p>
+<div class="center-custom">
+  <table class="table-custom">
+    <tr *ngFor="let row of cells">
+      <td *ngFor="let cell of row">
+        <button class="cell-custom">{{cell.X}} {{cell.Y}}</button>
+      </td>
+    </tr>
+  </table>
+</div>

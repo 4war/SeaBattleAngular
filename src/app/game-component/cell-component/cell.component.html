@@ -1,0 +1,6 @@
+<button class="cell-custom" style="background-image: url({{this.getBgImageUrl()}})"
+        (mouseenter)="selectCell()"
+        (mouseleave)="deselectCell()"
+        (click)="confirmClick()">
+  {{this.Cell.X}} {{this.Cell.Y}}
+</button>

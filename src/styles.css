@@ -27,4 +27,5 @@ body{
   height: 100%;
   border: none;
   text-decoration: none;
+  background-size: contain;
 }

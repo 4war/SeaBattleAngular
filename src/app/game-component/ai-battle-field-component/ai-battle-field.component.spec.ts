@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AiBattleFieldComponentComponent } from './ai-battle-field-component.component';
+import { AiBattleFieldComponent } from './ai-battle-field.component';
 
 describe('AiBattleFieldComponentComponent', () => {
-  let component: AiBattleFieldComponentComponent;
-  let fixture: ComponentFixture<AiBattleFieldComponentComponent>;
+  let component: AiBattleFieldComponent;
+  let fixture: ComponentFixture<AiBattleFieldComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AiBattleFieldComponentComponent ]
+      declarations: [ AiBattleFieldComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AiBattleFieldComponentComponent);
+    fixture = TestBed.createComponent(AiBattleFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

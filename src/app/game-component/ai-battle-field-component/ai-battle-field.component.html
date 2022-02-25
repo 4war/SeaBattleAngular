@@ -2,7 +2,7 @@
   <table class="table-custom">
     <tr *ngFor="let row of battleField.map">
       <td *ngFor="let cell of row">
-        <button class="cell-custom">{{cell.X}} {{cell.Y}}</button>
+        <app-cell-component [cell]="cell" [side]="side"></app-cell-component>
       </td>
     </tr>
   </table>

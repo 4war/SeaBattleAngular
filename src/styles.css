@@ -28,4 +28,5 @@ body{
   border: none;
   text-decoration: none;
   background-size: contain;
+  cursor: url('assets/images/Cursors/Nuclear_symbol.png'), pointer;
 }

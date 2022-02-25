@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CellComponent} from "../cell-component/cell.component";
 import {BattleField} from "../../Models/BattleField";
-import {size} from "../../Models/Game";
+import {Game, size} from "../../Models/Game";
+import {Sides} from "../../Models/Sides";
+import {Cell} from "../../Models/Cell";
 
 @Component({
   selector: 'app-user-battle-field-component',
@@ -12,7 +14,10 @@ import {size} from "../../Models/Game";
 export class UserBattleFieldComponent implements OnInit {
   public cellComponents: CellComponent[][] = [];
 
-  constructor(public battleField: BattleField) {
+  @Input() battleField!: BattleField;
+  public side: Sides = Sides.User;
+
+  constructor(private game:Game) {
     this.fillCellComponents();
   }
 
@@ -20,13 +25,16 @@ export class UserBattleFieldComponent implements OnInit {
     for (let x = 0; x < size; x++) {
       this.cellComponents[x] = [];
       for (let y = 0; y < size; y++) {
-        this.cellComponents[x][y] = new CellComponent();
+        this.cellComponents[x][y] = new CellComponent(this.game);
       }
     }
   }
 
-  ngOnInit(): void {
+  showSomething(cell: Cell): void{
+    this.game.confirmClick();
+    console.log(JSON.stringify(cell));
   }
 
-
+  ngOnInit(): void {
+  }
 }

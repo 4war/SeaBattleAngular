@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import {Cell} from "../../Models/Cell";
-import {States} from "../../Models/States";
+import {Component, Input, OnInit} from '@angular/core';
 import {CellComponent} from "../cell-component/cell.component";
 import {BattleField} from "../../Models/BattleField";
-const size = 10;
+import {Game, size} from "../../Models/Game";
+import {Sides} from "../../Models/Sides";
+
 
 @Component({
   selector: 'app-ai-battle-field-component',
   templateUrl: './ai-battle-field.component.html',
   styleUrls: ['./ai-battle-field.component.css']
 })
+
 export class AiBattleFieldComponent implements OnInit {
   public cellComponents: CellComponent[][] = [];
 
-  constructor(public battleField: BattleField) {
+  public side: Sides = Sides.Ai;
+  @Input() battleField!: BattleField;
+
+  constructor(private game: Game) {
     this.fillCellComponents();
   }
 
@@ -21,7 +25,7 @@ export class AiBattleFieldComponent implements OnInit {
     for (let x = 0; x < size; x++) {
       this.cellComponents[x] = [];
       for (let y = 0; y < size; y++) {
-        this.cellComponents[x][y] = new CellComponent();
+        this.cellComponents[x][y] = new CellComponent(this.game);
       }
     }
   }

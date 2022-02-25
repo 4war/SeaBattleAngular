@@ -1,8 +1,6 @@
-﻿import {UserBattleFieldComponent} from "../game-component/user-battle-field-component/user-battle-field.component";
-import {AiBattleFieldComponent} from "../game-component/ai-battle-field-component/ai-battle-field.component";
-import {Cell} from "./Cell";
+﻿import {Cell} from "./Cell";
 import {States} from "./States";
-import {Game, size} from "./Game";
+import {size} from "./Game";
 
 export class BattleField{
 

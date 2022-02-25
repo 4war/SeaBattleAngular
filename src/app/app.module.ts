@@ -7,11 +7,12 @@ import { GameComponent } from './game-component/game.component';
 import { SettingComponentComponent } from './setting-component/setting-component.component';
 import { UserBattleFieldComponent } from './game-component/user-battle-field-component/user-battle-field.component';
 import { AiBattleFieldComponent } from './game-component/ai-battle-field-component/ai-battle-field.component';
-import { UserStateComponentComponent } from './game-component/user-state-component/user-state-component.component';
+import { UserStateComponent } from './game-component/user-state-component/user-state.component';
 import { AiStateComponentComponent } from './game-component/ai-state-component/ai-state-component.component';
 import { CellComponent } from './game-component/cell-component/cell.component';
-import {BattleField} from "./Models/BattleField";
 import {Game} from "./Models/Game";
+import {CheckField} from "./Logic/CheckField";
+import {GameService} from "./services/game.service";
 
 @NgModule({
   declarations: [
@@ -20,15 +21,15 @@ import {Game} from "./Models/Game";
     SettingComponentComponent,
     UserBattleFieldComponent,
     AiBattleFieldComponent,
-    UserStateComponentComponent,
+    UserStateComponent,
     AiStateComponentComponent,
-    CellComponent
+    CellComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [Game, BattleField],
+  providers: [Game, CheckField],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

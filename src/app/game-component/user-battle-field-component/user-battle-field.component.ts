@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CellComponent} from "../cell-component/cell.component";
-import {BattleField} from "../../Models/BattleField";
-import {Game, size} from "../../Models/Game";
-import {Sides} from "../../Models/Sides";
-import {Cell} from "../../Models/Cell";
+import {battleField} from "../../Models/BattleField";
+import {sides} from "../../Models/Sides";
+import {cell} from "../../Models/Cell";
+import {gameService, size} from "../../services/game.service";
+import {GameComponent} from "../game.component";
 
 @Component({
   selector: 'app-user-battle-field-component',
@@ -12,29 +13,19 @@ import {Cell} from "../../Models/Cell";
 })
 
 export class UserBattleFieldComponent implements OnInit {
-  public cellComponents: CellComponent[][] = [];
+  @Output() onUpdate: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input() battleField!: BattleField;
-  public side: Sides = Sides.User;
+  battleField: battleField;
+  side: sides = sides.User;
 
-  constructor(private game:Game) {
-    this.fillCellComponents();
-  }
-
-  private fillCellComponents(): void {
-    for (let x = 0; x < size; x++) {
-      this.cellComponents[x] = [];
-      for (let y = 0; y < size; y++) {
-        this.cellComponents[x][y] = new CellComponent(this.game);
-      }
-    }
-  }
-
-  showSomething(cell: Cell): void{
-    this.game.confirmClick();
-    console.log(JSON.stringify(cell));
+  constructor(public gameService:gameService) {
+    this.battleField = gameService.userBattleField;
   }
 
   ngOnInit(): void {
+  }
+
+  update(): void{
+    this.onUpdate.emit();
   }
 }

@@ -9,13 +9,14 @@
   display: flex;
   flex-flow: row nowrap;
   width: 85%;
-  margin-right: 5px;
+  margin-right: 1%;
 }
 
 .main-custom{
   display: flex;
   flex-flow: row nowrap;
-  margin: 50px 250px;
+  margin: 5% 10%;
+
   border-radius: 5vh;
   height: 80vh;
 }

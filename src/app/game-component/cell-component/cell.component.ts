@@ -1,50 +1,65 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Cell} from "../../Models/Cell";
+import {cell} from "../../Models/Cell";
 import {CellStyles} from "../../CellStyles";
-import {States} from "../../Models/States";
-import {Sides} from "../../Models/Sides";
-import {Game} from "../../Models/Game";
+import {states} from "../../Models/States";
+import {sides} from "../../Models/Sides";
+import {gameService} from "../../services/game.service";
 
 @Component({
   selector: 'app-cell-component',
   templateUrl: './cell.component.html',
   styleUrls: ['./cell.component.css']
 })
+
+
 export class CellComponent implements OnInit {
 
-  @Output() onClick: EventEmitter<Cell> = new EventEmitter<Cell>();
+  @Output() onClick: EventEmitter<cell> = new EventEmitter<cell>();
 
-  constructor(private game: Game) {
+  constructor(private gameService: gameService) {
+
   }
 
-  @Input('cell') cell!: Cell;
-  @Input('side') side!: Sides;
+  @Input('cell') cell!: cell;
+  @Input('side') side!: sides;
 
   ngOnInit(): void {
-    this.cell.Side = this.side;
+    this.cell.side = this.side;
   }
 
   getBgImageUrl(): string{
-    return CellStyles.get(this.cell.Side)!.get(this.cell.State)!;
+    return CellStyles.get(this.cell.side)!.get(this.cell.state)!;
   }
 
   selectCell() : void{
-    if (this.cell.State == States.Clear){
-      this.cell.State = States.Selected;
+    if (this.cell.state == states.Clear){
+      this.cell.state = states.Selected;
     }
   }
 
   deselectCell(): void{
-    if (this.cell.State == States.Selected){
-      this.cell.State = States.Clear;
+    if (this.cell.state == states.Selected){
+      this.cell.state = states.Clear;
     }
   }
 
   confirmClick(): void{
-    if (this.cell.State == States.Selected){
-      this.cell.State = States.HasShip;
+    if (this.cell.state == states.HasShip){
+      this.cell.state = states.Clear;
+      this.onClick.emit();
+      return;
     }
 
-    this.onClick.emit(this.cell);
+    if (this.cell.state == states.Selected){
+      this.cell.state = states.HasShip;
+      this.onClick.emit();
+      return;
+    }
+  }
+
+  clearCell(): void{
+    if (this.cell.state == states.HasShip){
+      this.cell.state = states.Clear;
+    }
   }
 }

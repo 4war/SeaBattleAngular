@@ -27,6 +27,12 @@ body{
   height: 100%;
   border: none;
   text-decoration: none;
-  background-size: contain;
-  cursor: url('assets/images/Cursors/Nuclear_symbol.png'), pointer;
+  background-size: cover;
 }
+
+.cell-custom:after{
+  display: block;
+  padding-bottom: 100%;
+}
+
+

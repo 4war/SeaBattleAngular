@@ -1,0 +1,11 @@
+.battlefield-border-custom{
+  border: #151f32 2px;
+}
+
+.state-cell-custom{
+  height: 20px;
+  width: 1px;
+  background-size: cover;
+  border: #e1e5e8 1px;
+  background-color: black;
+}

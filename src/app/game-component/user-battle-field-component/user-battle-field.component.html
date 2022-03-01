@@ -1,9 +1,8 @@
-
 <div class="center-custom">
   <table class="table-custom">
-    <tr *ngFor="let row of battleField.map">
-      <td *ngFor="let cell of row">
-        <app-cell-component [cell]="cell" [side]="side" (onClick)="showSomething($event)"></app-cell-component>
+    <tr *ngFor="let row of battleField.map" class="battlefield-border-custom">
+      <td *ngFor="let cell of row" class="battlefield-border-custom">
+        <app-cell-component [cell]="cell" [side]="side" (onClick)="update()"></app-cell-component>
       </td>
     </tr>
   </table>

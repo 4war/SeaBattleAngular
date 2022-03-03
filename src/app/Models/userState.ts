@@ -1,19 +1,19 @@
-﻿import {ship} from "./Ship";
+﻿import {Ship} from "./Ship";
 import {Observable} from "rxjs";
-import {gameService} from "../services/game.service";
+import {GameService} from "../services/game.service";
 import {stages} from "./Stages";
 
 export class userState {
   gameCanBeStarted: boolean = false;
-  ships: ship[] = [];
-  dictionary: Map<number, ship[]> = new Map<number, ship[]>([
+  ships: Ship[] = [];
+  dictionary: Map<number, Ship[]> = new Map<number, Ship[]>([
     [1, []], [2, []], [3, []], [4, []],
   ]);
   message: string = "Начинайте расставлять корабли на поле";
 
-  private observer: Observable<ship[]>;
+  private observer: Observable<Ship[]>;
 
-  constructor(private gameService: gameService) {
+  constructor(private gameService: GameService) {
     this.observer = this.gameService.getShipsObservable;
   }
 

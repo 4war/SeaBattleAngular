@@ -1,22 +1,24 @@
-﻿import {states} from "./Models/States";
-import {sides} from "./Models/Sides";
+﻿import {States} from "./Models/States";
+import {Sides} from "./Models/Sides";
 
-export const CellStyles = new Map<sides, Map<states, string>>([
-  [sides.User, new Map<states, string>([
-    [states.Clear, "assets/images/User/CellEmpty.png"],
-    [states.Empty, "assets/images/User/CellEmpty.png"],
-    [states.Shot, "assets/images/User/CellCross.png"],
-    [states.HasShip, "assets/images/User/CellCross.png"],
-    [states.Destroyed, "assets/images/User/CellCross.png"],
-    [states.Selected, "assets/images/User/CellSelected.png"],
+export const CellStyles = new Map<Sides, Map<States, string>>([
+  [Sides.User, new Map<States, string>([
+    [States.Clear, "assets/images/User/CellEmpty.png"],
+    [States.Empty, "assets/images/User/CellEmpty.png"],
+    [States.Shot, "assets/images/User/CellCross.png"],
+    [States.HasShip, "assets/images/User/CellCross.png"],
+    [States.Destroyed, "assets/images/User/CellCross.png"],
+    [States.Selected, "assets/images/User/CellSelected.png"],
+    [States.Unavailable, "assets/images/User/CellPoint.png"],
   ])],
-  [sides.Ai, new Map<states, string>([
-    [states.Clear, "assets/images/AI/CellEmpty.png"],
-    [states.Empty, "assets/images/AI/CellEmpty.png"],
-    [states.Shot, "assets/images/AI/CellCross.png"],
-    [states.HasShip, "assets/images/AI/CellCross.png"],
-    [states.Destroyed, "assets/images/AI/CellCross.png"],
-    [states.Selected, "assets/images/AI/CellSelected.png"],
+  [Sides.Ai, new Map<States, string>([
+    [States.Clear, "assets/images/AI/CellEmpty.png"],
+    [States.Empty, "assets/images/AI/CellEmpty.png"],
+    [States.Shot, "assets/images/AI/CellCross.png"],
+    [States.HasShip, "assets/images/AI/CellCross.png"],
+    [States.Destroyed, "assets/images/AI/CellCross.png"],
+    [States.Selected, "assets/images/AI/CellSelected.png"],
+    [States.Unavailable, "assets/images/AI/CellPoint.png"],
   ])]
 
 ])

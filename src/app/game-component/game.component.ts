@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, NgModule, OnInit, ViewChild} from '@angular/core';
-import {gameService} from "../services/game.service";
+import {GameService} from "../services/game.service";
 import {UserBattleFieldComponent} from "./user-battle-field-component/user-battle-field.component";
 import {UserStateComponent} from "./user-state-component/user-state.component";
 
@@ -17,7 +17,7 @@ export class GameComponent implements OnInit {
   @ViewChild(UserStateComponent)
   userStateComponent!: UserStateComponent;
 
-  constructor(public gameService: gameService) {
+  constructor(public gameService: GameService) {
   }
 
   ngOnInit(): void {

@@ -10,7 +10,7 @@ import {AiBattleFieldComponent} from './game-component/ai-battle-field-component
 import {UserStateComponent} from './game-component/user-state-component/user-state.component';
 import {AiStateComponentComponent} from './game-component/ai-state-component/ai-state-component.component';
 import {CellComponent} from './game-component/cell-component/cell.component';
-import {gameService} from "./services/game.service";
+import {GameService} from "./services/game.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import {gameService} from "./services/game.service";
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [gameService],
+  providers: [GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

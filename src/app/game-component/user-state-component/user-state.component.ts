@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {gameService} from "../../services/game.service";
+import {GameService} from "../../services/game.service";
 import {Observable} from "rxjs";
 import {userState} from "../../Models/UserState";
 
@@ -12,7 +12,7 @@ import {userState} from "../../Models/UserState";
 export class UserStateComponent implements OnInit {
 
   userState: userState;
-  constructor(private gameService: gameService) {
+  constructor(private gameService: GameService) {
     this.userState = this.gameService.userState;
   }
 

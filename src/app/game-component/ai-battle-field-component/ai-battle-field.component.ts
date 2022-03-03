@@ -1,8 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CellComponent} from "../cell-component/cell.component";
-import {battleField} from "../../Models/BattleField";
-import {sides} from "../../Models/Sides";
-import {gameService, size} from "../../services/game.service";
+import {BattleField} from "../../Models/BattleField";
+import {Sides} from "../../Models/Sides";
+import {GameService} from "../../services/game.service";
+import {Ship} from "../../Models/Ship";
+import {Cell} from "../../Models/Cell";
+import {from} from "linq-to-typescript";
+import {States} from "../../Models/States";
 
 
 @Component({
@@ -14,21 +18,32 @@ import {gameService, size} from "../../services/game.service";
 export class AiBattleFieldComponent implements OnInit {
   public cellComponents: CellComponent[][] = [];
 
-  side: sides = sides.Ai;
-  battleField: battleField;
+  side: Sides = Sides.Ai;
+  battleField: BattleField;
+  arrangement: Ship[];
 
-  constructor(private gameService: gameService) {
-    this.fillCellComponents();
+  constructor(private gameService: GameService) {
     this.battleField = gameService.aiBattleField;
+    this.battleField.arrangeAutomatically();
+    this.arrangement = this.battleField.arrangement;
+    this.setCellStates();
   }
 
-  private fillCellComponents(): void {
-    for (let x = 0; x < size; x++) {
-      this.cellComponents[x] = [];
-      for (let y = 0; y < size; y++) {
-        this.cellComponents[x][y] = new CellComponent(this.gameService);
-      }
-    }
+  setCellStates(): void {
+    let cellHasSet = new Set<Cell>(from(this.arrangement).selectMany(x => x.cells));
+    console.log(cellHasSet.size);
+
+    cellHasSet.forEach(cell => {
+      this.battleField.map[cell.y][cell.x].state = States.HasShip;
+    })
+
+    // let cellsWithShips: Cell[] = [];
+    // this.arrangement.forEach(ship => {
+    //   ship.cells.forEach(cell => {
+    //     cellsWithShips.push(cell);
+    //   })
+    // });
+
   }
 
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-﻿export enum sides{
+﻿export enum Sides{
   User,
   Ai
 }

@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {cell} from "../../Models/Cell";
+import {Cell} from "../../Models/Cell";
 import {CellStyles} from "../../CellStyles";
-import {states} from "../../Models/States";
-import {sides} from "../../Models/Sides";
-import {gameService} from "../../services/game.service";
+import {States} from "../../Models/States";
+import {Sides} from "../../Models/Sides";
+import {GameService} from "../../services/game.service";
 
 @Component({
   selector: 'app-cell-component',
@@ -14,14 +14,14 @@ import {gameService} from "../../services/game.service";
 
 export class CellComponent implements OnInit {
 
-  @Output() onClick: EventEmitter<cell> = new EventEmitter<cell>();
+  @Output() onClick: EventEmitter<Cell> = new EventEmitter<Cell>();
 
-  constructor(private gameService: gameService) {
+  constructor(private gameService: GameService) {
 
   }
 
-  @Input('cell') cell!: cell;
-  @Input('side') side!: sides;
+  @Input('cell') cell!: Cell;
+  @Input('side') side!: Sides;
 
   ngOnInit(): void {
     this.cell.side = this.side;
@@ -32,34 +32,34 @@ export class CellComponent implements OnInit {
   }
 
   selectCell() : void{
-    if (this.cell.state == states.Clear){
-      this.cell.state = states.Selected;
+    if (this.cell.state == States.Clear){
+      this.cell.state = States.Selected;
     }
   }
 
   deselectCell(): void{
-    if (this.cell.state == states.Selected){
-      this.cell.state = states.Clear;
+    if (this.cell.state == States.Selected){
+      this.cell.state = States.Clear;
     }
   }
 
   confirmClick(): void{
-    if (this.cell.state == states.HasShip){
-      this.cell.state = states.Clear;
+    if (this.cell.state == States.HasShip){
+      this.cell.state = States.Clear;
       this.onClick.emit();
       return;
     }
 
-    if (this.cell.state == states.Selected){
-      this.cell.state = states.HasShip;
+    if (this.cell.state == States.Selected){
+      this.cell.state = States.HasShip;
       this.onClick.emit();
       return;
     }
   }
 
   clearCell(): void{
-    if (this.cell.state == states.HasShip){
-      this.cell.state = states.Clear;
+    if (this.cell.state == States.HasShip){
+      this.cell.state = States.Clear;
     }
   }
 }

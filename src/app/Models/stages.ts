@@ -1,4 +1,4 @@
-﻿export enum stages{
+﻿export enum Stages{
   Preparation,
   Fight,
   Ending

@@ -4,8 +4,8 @@ import {BattleField} from "../Models/BattleField";
 import {userState} from "../Models/UserState";
 import {Observable} from "rxjs";
 import {Ship} from "../Models/Ship";
-import {stages} from "../Models/Stages";
-import {rules} from "../Models/rules";
+import {Stages} from "../Models/Stages";
+import {Rules} from "../Models/rules";
 
 export const size = 10;
 
@@ -15,8 +15,13 @@ export const size = 10;
 })
 
 export class GameService {
-  stage: stages = stages.Preparation;
-  currentRules: rules = new rules();
+  get stage(): typeof Stages{
+    return Stages;
+  }
+
+  currentStage = Stages.Preparation;
+
+  currentRules: Rules = new Rules();
   userBattleField: BattleField;
   aiBattleField: BattleField;
 
@@ -36,7 +41,8 @@ export class GameService {
   userState = new userState(this);
 
   startGame() {
-    this.stage = stages.Fight;
+    this.userState.update();
+    this.currentStage = Stages.Fight;
   }
 }
 

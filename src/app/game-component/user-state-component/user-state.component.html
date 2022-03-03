@@ -1,40 +1,18 @@
 <div class="message-custom">{{userState.message}}</div>
 <div class="reserve-custom">
-  <span class="ship-line-custom">
-      <span>{{userState.dictionary.get(1)!.length}}/4</span>
-      <span class="ship-block-chain-custom">
-        <span class="ship-block-custom"></span>
-        <span class="ship-block-custom"></span>
-        <span class="ship-block-custom"></span>
+  <span class="ship-line-custom" *ngFor="let kvp of gameService.currentRules.quantities | keyvalue">
+      <span class="ship-counter-custom">{{userState.dictionary.get(kvp.key)!.length}}/{{kvp.value}}</span>
+      <span class="ship-block-chain-custom" *ngFor="let a of [].constructor(kvp.value)">
         <span class="ship-block-custom"></span>
       </span>
   </span>
 
-  <span class="ship-line-custom">
-      <span>{{userState.dictionary.get(2)!.length}}/3</span>
-      <span class="ship-block-chain-custom">
-        <span class="ship-block-custom"></span>
-        <span class="ship-block-custom"></span>
-        <span class="ship-block-custom"></span>
-      </span>
+  <span>
+    <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise-custom" (click)="clear()">Очистить</button>
+    <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise-custom" (click)="randomise()">Random</button>
+    <button *ngIf="userState.gameCanBeStarted" (click)="startGame()" class="confirm-custom">Начать</button>
   </span>
 
-  <span class="ship-line-custom">
-      <span>{{userState.dictionary.get(3)!.length}}/2</span>
-      <span class="ship-block-chain-custom">
-        <span class="ship-block-custom"></span>
-        <span class="ship-block-custom"></span>
-      </span>
-  </span>
-
-  <span class="ship-line-custom">
-      <span>{{userState.dictionary.get(4)!.length}}/1</span>
-      <span class="ship-block-chain-custom">
-        <span class="ship-block-custom"></span>
-      </span>
-  </span>
-
-  <button *ngIf="userState.gameCanBeStarted" (click)="startGame()" class="confirm-custom">Начать</button>
 </div>
 
 

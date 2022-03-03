@@ -12,29 +12,17 @@ export class Preparation {
   }
 
   setShipsAutomatically(): Ship[] {
+    this.battleField.clearMap();
     for (let i = 0; i < 10; i++) {
       let result: Ship[] = [];
-      let ship = this.arrangeShip(4);
-      result.push(ship);
 
-      for (let i = 0; i < 2; i++) {
-        let ship = this.arrangeShip(3);
-        result.push(ship);
-      }
-
-      for (let i = 0; i < 3; i++) {
-        let ship = this.arrangeShip(2);
-        result.push(ship);
-      }
-
-      for (let i = 0; i < 4; i++) {
-        let torpedoShip = this.arrangeShip(1);
-        result.push(torpedoShip);
-      }
-
-      for (let cells = 4; cells >= 1; cells--) {
-        let quantity = this.gameService.currentRules.quantities.get(cells)!;
-      }
+      let rules = this.gameService.currentRules;
+      rules.quantities.forEach((value, key) => {
+        for (let n = 0; n < key; n++) {
+          let ship = this.arrangeShip(value);
+          result.push(ship);
+        }
+      });
 
       if (this.checkField(result))
         return result;
@@ -46,9 +34,9 @@ export class Preparation {
   }
 
   private checkField(arrangement: Ship[]): boolean {
-    return  from(this.battleField.map)
+    return from(this.battleField.map)
       .selectMany(row => row)
-      .count(cell => cell.state == States.HasShip) == 20;
+      .count(cell => cell.state == States.HasShip) == this.gameService.currentRules.checkSum;
   }
 
   private arrangeShip(lengthOfShip: number): Ship {

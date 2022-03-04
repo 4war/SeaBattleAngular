@@ -28,3 +28,78 @@
 }
 
 
+.confirm {
+  border-radius: 1vh;
+  background-color: #151f32;
+  color: #e1e5e8;
+  border: none;
+  padding: 0.5vh 3vh;
+  margin: 1vh 1vh;
+  float: left;
+}
+
+.float-bottom-custom{
+  display: block;
+  float: bottom;
+}
+
+.randomise {
+  border-radius: 1vh;
+  background-color: #151f32;
+  border: none;
+  padding: 0.5vh 3vh;
+  margin: 1vh 1vh;
+  float: right;
+}
+
+.message-custom {
+  font-size: 2vh;
+}
+
+.reserve-list {
+  height: 300px;
+  font-size: 1.5vh;
+}
+
+.ship-line {
+  display: flex;
+  width: 5vh;
+  height: 2vh;
+}
+
+.ship-block-user {
+  width: 1.5vh;
+  height: 1.5vh;
+  margin-top: 0.35vh;
+  background-image: url("src/assets/images/User/CellShip.png");
+  background-size: cover;
+}
+
+.ship-block-enemy {
+  width: 1.5vh;
+  height: 1.5vh;
+  margin-top: 0.35vh;
+  background-image: url("src/assets/images/AI/CellShip.png");
+  background-size: cover;
+}
+
+.ship-counter{
+  margin: 0 20px 0 0;
+}
+
+.ship-block-chain {
+  display: flex;
+  width: fit-content;
+}
+
+.red{
+  color: #ff4c4c;
+}
+
+.green{
+  color: #66bb6a;
+}
+
+.white{
+  color: #e1e5e8;
+}

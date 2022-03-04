@@ -25,6 +25,9 @@ export class Cell {
   click(): void {
     switch (this.stage) {
       case Stage.Preparation: {
+        if (this.side == Side.Ai)
+          return;
+
         if (this.state == State.HasShip) {
           this.state = State.Clear;
 

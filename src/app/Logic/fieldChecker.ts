@@ -13,11 +13,13 @@ export class fieldChecker {
       [4,[]],
     ]);
     ships.forEach((ship) => {
-      let count = ship.cells.length;
-      if (!result.has(count))
-        result.set(count, [])
+      if (!from(ship.cells).all(c => c.state == State.Destroyed)){
+        let count = ship.cells.length;
+        if (!result.has(count))
+          result.set(count, [])
 
-      result.get(count)!.push(ship);
+        result.get(count)!.push(ship);
+      }
     })
 
     return result;

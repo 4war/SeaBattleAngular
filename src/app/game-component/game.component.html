@@ -1,9 +1,7 @@
 <div class="container-fluid">
   <div class="row battlefield">
-    <app-user-battle-field-component class="col battlefield-user" (onUpdate)="update()">
-    </app-user-battle-field-component>
-
-    <app-ai-battle-field-component class="col battlefield-enemy"></app-ai-battle-field-component>
+    <app-user-battle-field-component class="col battlefield-user" (onUpdate)="update()"></app-user-battle-field-component>
+    <app-ai-battle-field-component class="col battlefield-enemy" (onEnemyUpdate)="update()"></app-ai-battle-field-component>
   </div>
   <div class="row state">
     <app-user-state-component class="col state-user"></app-user-state-component>

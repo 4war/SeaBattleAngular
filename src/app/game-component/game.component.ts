@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, NgModule, OnInit, ViewChild} from '@angu
 import {GameService} from "../services/game.service";
 import {UserBattleFieldComponent} from "./user-battle-field-component/user-battle-field.component";
 import {UserStateComponent} from "./user-state-component/user-state.component";
+import {AiBattleFieldComponent} from "./ai-battle-field-component/ai-battle-field.component";
+import {AiStateComponent} from "./ai-state-component/ai-state.component";
 
 @Component({
   selector: 'app-game-component',
@@ -17,6 +19,12 @@ export class GameComponent implements OnInit {
   @ViewChild(UserStateComponent)
   userStateComponent!: UserStateComponent;
 
+  @ViewChild(AiBattleFieldComponent)
+  aiBattleFieldComponent!: AiBattleFieldComponent;
+
+  @ViewChild(AiStateComponent)
+  aiStateComponent!: AiStateComponent;
+
   constructor(public gameService: GameService) {
   }
 
@@ -24,6 +32,7 @@ export class GameComponent implements OnInit {
   }
 
   update(): void{
-    this.gameService.userState.update();
+    this.gameService.userReserve.update();
+    this.gameService.aiReserve.update();
   }
 }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AiStateComponentComponent } from './ai-state-component.component';
+import { AiStateComponent } from './ai-state.component';
 
 describe('AiStateComponentComponent', () => {
-  let component: AiStateComponentComponent;
-  let fixture: ComponentFixture<AiStateComponentComponent>;
+  let component: AiStateComponent;
+  let fixture: ComponentFixture<AiStateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AiStateComponentComponent ]
+      declarations: [ AiStateComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AiStateComponentComponent);
+    fixture = TestBed.createComponent(AiStateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

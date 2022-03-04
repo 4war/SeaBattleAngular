@@ -2,8 +2,9 @@
 import {Observable} from "rxjs";
 import {GameService} from "../services/game.service";
 import {Stage} from "./Stage";
+import {BattleField} from "./BattleField";
 
-export class userState {
+export class Reserve {
   get restartVisible(): boolean {
     return this.gameService.currentStage != Stage.Preparation;
   }
@@ -16,14 +17,14 @@ export class userState {
   ]);
   message: string = "Начинайте расставлять корабли на поле";
 
-  private observer: Observable<Ship[]>;
+ // private observer: Observable<Ship[]>;
 
-  constructor(private gameService: GameService) {
-    this.observer = this.gameService.getShipsObservable;
+  constructor(private gameService: GameService, private battleField: BattleField) {
+   // this.observer = this.gameService.getShipsObservable;
   }
 
   update(): void {
-    this.observer.subscribe(value => this.ships = value);
+    this.ships = this.gameService.fieldChecker.GetShips(this.battleField.map);
     this.dictionary = this.gameService.fieldChecker.UpdateDictionary(this.ships);
     this.gameCanBeStarted = false;
 

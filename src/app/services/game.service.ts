@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {fieldChecker} from "../Logic/FieldChecker";
 import {BattleField} from "../Models/BattleField";
-import {userState} from "../Models/UserState";
+import {Reserve} from "../Models/Reserve";
 import {Observable} from "rxjs";
 import {Ship} from "../Models/Ship";
 import {Stage} from "../Models/Stage";
@@ -17,7 +17,7 @@ export const size = 10;
 
 export class GameService {
 
-  get stage(): typeof Stage{
+  get stage(): typeof Stage {
     return Stage;
   }
 
@@ -33,28 +33,40 @@ export class GameService {
   constructor() {
     this.userBattleField = new BattleField(this, Side.User);
     this.aiBattleField = new BattleField(this, Side.Ai);
+    this.userReserve = new Reserve(this, this.userBattleField);
+    this.aiReserve = new Reserve(this, this.aiBattleField);
   }
 
-  getShipsObservable: Observable<Ship[]> = new Observable<Ship[]>(observer => {
-    let map = this.userBattleField.map;
-    let ships = this.fieldChecker.GetShips(map);
-    observer.next(ships);
-  });
+  // getUserShipsObservable: Observable<Ship[]> = new Observable<Ship[]>(observer => {
+  //   let map = this.userBattleField.map;
+  //   let ships = this.fieldChecker.GetShips(map);
+  //   observer.next(ships);
+  // });
+  //
+  // getEnemyShipsObservable: Observable<Ship[]> = new Observable<Ship[]>(observer => {
+  //   let map = this.aiBattleField.map;
+  //   let ships = this.fieldChecker.GetShips(map);
+  //   observer.next(ships);
+  // });
 
-  userState = new userState(this);
+  userReserve: Reserve;
+  aiReserve: Reserve;
 
   startGame() {
     this.aiBattleField.arrangeAutomatically();
-    this.userState.update();
+    this.userReserve.update();
+    this.aiReserve.update();
     this.currentStage = Stage.Fight;
   }
 
-  endGame(side: Side){
+  endGame(side: Side) {
+    this.aiBattleField.map.forEach(row => row.forEach(cell => cell.deselect()));
     this.currentStage = Stage.End;
-    this.userState.message = side == Side.Ai ? `Победа` : `Поражение`;
+    this.userReserve.message = side == Side.Ai ? `Победа` : `Поражение`;
+    this.aiReserve.message = side == Side.Ai ? `Поражение` : `Победа`;
   }
 
-  restartGame(){
+  restartGame() {
     this.aiBattleField.clearMap();
     this.userBattleField.clearMap();
     this.currentStage = Stage.Preparation;

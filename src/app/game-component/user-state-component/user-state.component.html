@@ -1,23 +1,18 @@
-<div class="message-custom">{{userState.message}}</div>
-<div class="reserve-custom">
-  <div *ngIf="gameService.currentStage == gameService.stage.Preparation">
-  <span class="ship-line-custom" *ngFor="let kvp of gameService.currentRules.quantities | keyvalue">
-      <span class="ship-counter-custom"
-            [ngClass]="userState.dictionary.get(kvp.key)!.length == kvp.value? 'color-green-custom': 'color-red-custom'">
-        {{userState.dictionary.get(kvp.key)!.length}}/{{kvp.value}}</span>
-      <span class="ship-block-chain-custom" *ngFor="let a of [].constructor(kvp.key)">
-        <span class="ship-block-custom"></span>
+<div class="message-custom white">{{reserve.message}}</div>
+<div class="reserve-list white">
+  <span class="ship-line white" *ngFor="let kvp of gameService.currentRules.quantities | keyvalue">
+      <span class="ship-counter"
+            [ngClass]="reserve.dictionary.get(kvp.key)!.length == kvp.value? 'green': 'red'">
+        {{reserve.dictionary.get(kvp.key)!.length}}/{{kvp.value}}</span>
+      <span class="ship-block-chain" *ngFor="let a of [].constructor(kvp.key)">
+        <span class="ship-block-user"></span>
       </span>
   </span>
-  </div>
-  <span class="float-bottom-custom">
-    <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise-custom"
-            (click)="clear()">Clear</button>
-    <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise-custom"
-            (click)="randomise()">Random</button>
-    <button *ngIf="userState.gameCanBeStarted" (click)="startGame()" class="confirm-custom">Start</button>
-    <button *ngIf="userState.restartVisible" (click)="restartGame()" class="confirm-custom">Restart</button>
-  </span>
+
+  <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise white" (click)="clear()">Clear</button>
+  <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise white" (click)="randomise()">Random</button>
+  <button *ngIf="reserve.gameCanBeStarted" (click)="startGame()" class="confirm white">Start</button>
+  <button *ngIf="reserve.restartVisible" (click)="restartGame()" class="confirm white">Restart</button>
 
 </div>
 

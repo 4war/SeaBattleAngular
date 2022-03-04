@@ -1,21 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {Observable} from "rxjs";
-import {userState} from "../../Models/UserState";
+import {Reserve} from "../../Models/Reserve";
 import {Preparation} from "../../Logic/AI/preparation";
 
 @Component({
   selector: 'app-user-state-component',
   templateUrl: './user-state.component.html',
-  styleUrls: ['./user-state.component.css']
+  styleUrls: ['./user-state.component.css', '../game.component.css']
 })
 
 export class UserStateComponent implements OnInit {
 
   preparation: Preparation;
-  userState: userState;
+  reserve: Reserve;
   constructor(public gameService: GameService) {
-    this.userState = this.gameService.userState;
+    this.reserve = this.gameService.userReserve;
     this.preparation = new Preparation(this.gameService, this.gameService.userBattleField);
   }
 
@@ -24,7 +24,7 @@ export class UserStateComponent implements OnInit {
 
   startGame(): void{
     this.gameService.startGame();
-    this.userState.message = 'Битва началась';
+    this.reserve.message = 'Битва началась';
   }
 
   restartGame(): void{
@@ -33,11 +33,11 @@ export class UserStateComponent implements OnInit {
 
   randomise(): void{
     this.gameService.userBattleField.arrangement = this.preparation.setShipsAutomatically();
-    this.userState.update();
+    this.reserve.update();
   }
 
   clear(): void{
     this.gameService.userBattleField.clearMap();
-    this.userState.update();
+    this.reserve.update();
   }
 }

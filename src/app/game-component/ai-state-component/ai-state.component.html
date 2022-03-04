@@ -1,0 +1,12 @@
+<div class="message-custom white">Корабли противника</div>
+<div class="reserve-list">
+  <span class="ship-line" *ngFor="let kvp of gameService.currentRules.quantities | keyvalue">
+      <span class="ship-counter white">
+        {{reserve.dictionary.get(kvp.key)!.length}}/{{kvp.value}}</span>
+      <span class="ship-block-chain" *ngFor="let a of [].constructor(kvp.key)">
+        <span class="ship-block-enemy"></span>
+      </span>
+  </span>
+</div>
+
+

@@ -8,7 +8,7 @@ import {SettingComponentComponent} from './setting-component/setting-component.c
 import {UserBattleFieldComponent} from './game-component/user-battle-field-component/user-battle-field.component';
 import {AiBattleFieldComponent} from './game-component/ai-battle-field-component/ai-battle-field.component';
 import {UserStateComponent} from './game-component/user-state-component/user-state.component';
-import {AiStateComponentComponent} from './game-component/ai-state-component/ai-state-component.component';
+import {AiStateComponent} from './game-component/ai-state-component/ai-state.component';
 import {CellComponent} from './game-component/cell-component/cell.component';
 import {GameService} from "./services/game.service";
 
@@ -20,7 +20,7 @@ import {GameService} from "./services/game.service";
     UserBattleFieldComponent,
     AiBattleFieldComponent,
     UserStateComponent,
-    AiStateComponentComponent,
+    AiStateComponent,
     CellComponent,
   ],
   imports: [

@@ -3,7 +3,7 @@
 import {GameService} from "../../services/game.service";
 import {Preparation} from "./preparation";
 import {from} from "linq-to-typescript";
-import {States} from "../../Models/States";
+import {State} from "../../Models/State";
 
 describe('GameServicesService', () => {
   let service: GameService;
@@ -71,7 +71,7 @@ describe('GameServicesService', () => {
 
       let filledCells = from(service.aiBattleField.map)
         .selectMany(row => row)
-        .where(cell => cell.state == States.HasShip)
+        .where(cell => cell.state == State.HasShip)
         .toArray();
       expect(filledCells).toHaveSize(20);
     }

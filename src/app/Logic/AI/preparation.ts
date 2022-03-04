@@ -3,12 +3,15 @@ import {Ship} from "../../Models/Ship";
 import {Cell} from "../../Models/Cell";
 import {BattleField} from "../../Models/BattleField";
 import {ArgumentOutOfRangeException, from} from "linq-to-typescript";
-import {States} from "../../Models/States";
+import {State} from "../../Models/State";
 
 
 export class Preparation {
 
+  private fieldChecker;
+
   constructor(private gameService: GameService, private battleField: BattleField) {
+    this.fieldChecker = this.gameService.fieldChecker;
   }
 
   setShipsAutomatically(): Ship[] {
@@ -33,10 +36,27 @@ export class Preparation {
     throw new ArgumentOutOfRangeException('Не удалось разместить корабли на поле');
   }
 
+  setCellStates(arrangement: Ship[]): void {
+    let cellHasSet = new Set<Cell>(from(arrangement).selectMany(x => x.cells));
+    console.log(cellHasSet.size);
+
+    cellHasSet.forEach(cell => {
+      this.battleField.map[cell.y][cell.x].state = State.HasShip;
+    })
+  }
+
+  updateUnavailableCells(): void {
+    let ships = this.fieldChecker.GetShips(this.battleField.map);
+    this.battleField.clearMap();
+    ships.forEach(ship => {
+      this.updateMapAfterShip(ship);
+    });
+  }
+
   private checkField(arrangement: Ship[]): boolean {
     return from(this.battleField.map)
       .selectMany(row => row)
-      .count(cell => cell.state == States.HasShip) == this.gameService.currentRules.checkSum;
+      .count(cell => cell.state == State.HasShip) == this.gameService.currentRules.checkSum;
   }
 
   private arrangeShip(lengthOfShip: number): Ship {
@@ -47,11 +67,11 @@ export class Preparation {
         x = parseInt((Math.random() * size).toString());
         y = parseInt((Math.random() * size).toString());
 
-        if (this.battleField.map[y][x].state == States.Clear)
+        if (this.battleField.map[y][x].state == State.Clear)
           break;
       }
 
-      let cellArray: Cell[] = [new Cell(x, y)];
+      let cellArray: Cell[] = [this.battleField.map[y][x]];
       let horizontal = Math.random() > 0.5;
       let flag = horizontal;
       for (let z = 0; z < 2; z++) {
@@ -63,11 +83,11 @@ export class Preparation {
             let nextPossibleCells: Cell[] = [];
             let max = from(cellArray).select(cell => cell.x).max();
             let min = from(cellArray).select(cell => cell.x).min();
-            if (max < size - 1 && this.battleField.map[y][max + 1].state == States.Clear)
-              nextPossibleCells.push(new Cell(max + 1, y));
+            if (max < size - 1 && this.battleField.map[y][max + 1].state == State.Clear)
+              nextPossibleCells.push(this.battleField.map[y][max + 1]);
 
-            if (min > 0 && this.battleField.map[y][min - 1].state == States.Clear)
-              nextPossibleCells.push(new Cell(min - 1, y));
+            if (min > 0 && this.battleField.map[y][min - 1].state == State.Clear)
+              nextPossibleCells.push(this.battleField.map[y][min - 1]);
 
             if (nextPossibleCells.length == 0) {
               horizontal = !horizontal;
@@ -81,11 +101,11 @@ export class Preparation {
             let nextPossibleCells: Cell[] = [];
             let max = from(cellArray).select(cell => cell.y).max();
             let min = from(cellArray).select(cell => cell.y).min();
-            if (max < size - 1 && this.battleField.map[max + 1][x].state == States.Clear)
-              nextPossibleCells.push(new Cell(x, max + 1));
+            if (max < size - 1 && this.battleField.map[max + 1][x].state == State.Clear)
+              nextPossibleCells.push(this.battleField.map[max + 1][x]);
 
-            if (min > 0 && this.battleField.map[min - 1][x].state == States.Clear)
-              nextPossibleCells.push(new Cell(x, min - 1));
+            if (min > 0 && this.battleField.map[min - 1][x].state == State.Clear)
+              nextPossibleCells.push(this.battleField.map[min - 1][x]);
 
             if (nextPossibleCells.length == 0) {
               horizontal = !horizontal;
@@ -108,7 +128,7 @@ export class Preparation {
   }
 
   private updateMapAfterShip(newShip: Ship): void {
-    newShip.cells.forEach(cell => this.battleField.map[cell.y][cell.x].state = States.HasShip);
+    newShip.cells.forEach(cell => this.battleField.map[cell.y][cell.x].state = State.HasShip);
     let first = from(newShip.cells).first();
     let last = from(newShip.cells).last();
 
@@ -118,28 +138,33 @@ export class Preparation {
     let down = last.y + 1;
 
     if (down < size)
-      this.closeYBorders(left, right, down);
+      this.closeYBorders(left, right, down, newShip);
 
     if (up >= 0)
-      this.closeYBorders(left, right, up);
+      this.closeYBorders(left, right, up, newShip);
 
     if (left >= 0)
-      this.closeXBorders(up, down, left);
+      this.closeXBorders(up, down, left, newShip);
 
     if (right < size)
-      this.closeXBorders(up, down, right);
+      this.closeXBorders(up, down, right, newShip);
   }
 
-  private closeYBorders(left: number, right: number, yBorder: number): void {
+  private closeYBorders(left: number, right: number, yBorder: number, ship: Ship): void {
     for (let x = left; x <= right; x++)
-      if (x >= 0 && x < size)
-        this.battleField.map[yBorder][x].state = States.Unavailable;
+      if (x >= 0 && x < size && this.battleField.map[yBorder][x].state != State.HasShip) {
+        this.battleField.map[yBorder][x].state = State.Unavailable;
+        ship.unavailableCells.push(this.battleField.map[yBorder][x]);
+      }
+
   }
 
-  private closeXBorders(up: number, down: number, xBorder: number): void {
+  private closeXBorders(up: number, down: number, xBorder: number, ship: Ship): void {
     for (let y = up; y <= down; y++)
-      if (y >= 0 && y < size)
-        this.battleField.map[y][xBorder].state = States.Unavailable;
+      if (y >= 0 && y < size && this.battleField.map[y][xBorder].state != State.HasShip) {
+        this.battleField.map[y][xBorder].state = State.Unavailable;
+        ship.unavailableCells.push(this.battleField.map[y][xBorder]);
+      }
   }
 
   private getRandomFromArray(array: Cell[]): Cell {

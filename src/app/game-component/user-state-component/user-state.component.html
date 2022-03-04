@@ -1,16 +1,22 @@
 <div class="message-custom">{{userState.message}}</div>
 <div class="reserve-custom">
+  <div *ngIf="gameService.currentStage == gameService.stage.Preparation">
   <span class="ship-line-custom" *ngFor="let kvp of gameService.currentRules.quantities | keyvalue">
-      <span class="ship-counter-custom">{{userState.dictionary.get(kvp.key)!.length}}/{{kvp.value}}</span>
-      <span class="ship-block-chain-custom" *ngFor="let a of [].constructor(kvp.value)">
+      <span class="ship-counter-custom"
+            [ngClass]="userState.dictionary.get(kvp.key)!.length == kvp.value? 'color-green-custom': 'color-red-custom'">
+        {{userState.dictionary.get(kvp.key)!.length}}/{{kvp.value}}</span>
+      <span class="ship-block-chain-custom" *ngFor="let a of [].constructor(kvp.key)">
         <span class="ship-block-custom"></span>
       </span>
   </span>
-
-  <span>
-    <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise-custom" (click)="clear()">Очистить</button>
-    <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise-custom" (click)="randomise()">Random</button>
-    <button *ngIf="userState.gameCanBeStarted" (click)="startGame()" class="confirm-custom">Начать</button>
+  </div>
+  <span class="float-bottom-custom">
+    <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise-custom"
+            (click)="clear()">Clear</button>
+    <button *ngIf="gameService.currentStage == gameService.stage.Preparation" class="randomise-custom"
+            (click)="randomise()">Random</button>
+    <button *ngIf="userState.gameCanBeStarted" (click)="startGame()" class="confirm-custom">Start</button>
+    <button *ngIf="userState.restartVisible" (click)="restartGame()" class="confirm-custom">Restart</button>
   </span>
 
 </div>

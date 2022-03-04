@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CellComponent} from "../cell-component/cell.component";
 import {BattleField} from "../../Models/BattleField";
-import {Sides} from "../../Models/Sides";
+import {Side} from "../../Models/Side";
 import {Cell} from "../../Models/Cell";
 import {GameService, size} from "../../services/game.service";
 import {GameComponent} from "../game.component";
@@ -16,7 +16,7 @@ export class UserBattleFieldComponent implements OnInit {
   @Output() onUpdate: EventEmitter<any> = new EventEmitter<any>();
 
   battleField: BattleField;
-  side: Sides = Sides.User;
+  side: Side = Side.User;
 
   constructor(public gameService:GameService) {
     this.battleField = gameService.userBattleField;

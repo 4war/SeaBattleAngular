@@ -27,6 +27,10 @@ export class UserStateComponent implements OnInit {
     this.userState.message = 'Битва началась';
   }
 
+  restartGame(): void{
+    this.gameService.restartGame();
+  }
+
   randomise(): void{
     this.gameService.userBattleField.arrangement = this.preparation.setShipsAutomatically();
     this.userState.update();

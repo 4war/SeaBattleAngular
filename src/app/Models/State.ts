@@ -1,4 +1,4 @@
-﻿export enum States{
+﻿export enum State{
   Clear,
   HasShip,
   Empty,

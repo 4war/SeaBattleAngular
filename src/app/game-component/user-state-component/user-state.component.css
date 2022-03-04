@@ -5,6 +5,12 @@
   border: none;
   padding: 0.5vh 3vh;
   margin: 1vh 1vh;
+  float: left;
+}
+
+.float-bottom-custom{
+  height: fit-content;
+  float: bottom;
 }
 
 .randomise-custom {
@@ -26,30 +32,40 @@
 .reserve-custom {
   color: #e1e5e8;
   font-size: 1.5vh;
+  height: 300px;
 }
 
 .ship-line-custom {
-  margin-right: 200px;
   display: flex;
   width: 5vh;
   height: 2vh;
 }
 
 .ship-block-custom {
-  width: 2vh;
-  height: 2vh;
-  background-image: url("src/assets/images/User/CellCross.png");
+  width: 1.5vh;
+  height: 1.5vh;
+  margin-top: 0.35vh;
+  background-image: url("src/assets/images/User/CellShip.png");
   background-size: cover;
 }
 
 .ship-counter-custom{
-  margin: 0 20px 0 2px;
+  margin: 0 20px 0 0;
 }
 
 .ship-block-chain-custom {
   display: flex;
   width: fit-content;
 }
+
+.color-red-custom{
+  color: #ff4c4c;
+}
+
+.color-green-custom{
+  color: #66bb6a;
+}
+
 
 
 

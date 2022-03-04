@@ -1,17 +1,14 @@
 ﻿import {Ship} from "./Ship";
 import {Observable} from "rxjs";
 import {GameService} from "../services/game.service";
-import {Stages} from "./Stages";
+import {Stage} from "./Stage";
 
 export class userState {
-  get gameCanBeStarted(): boolean {
-    return this._gameCanBeStarted;
+  get restartVisible(): boolean {
+    return this.gameService.currentStage != Stage.Preparation;
   }
 
-  set gameCanBeStarted(value: boolean) {
-    this._gameCanBeStarted = value;
-  }
-  private _gameCanBeStarted: boolean = false;
+  gameCanBeStarted: boolean = false;
 
   ships: Ship[] = [];
   dictionary: Map<number, Ship[]> = new Map<number, Ship[]>([
@@ -28,7 +25,7 @@ export class userState {
   update(): void {
     this.observer.subscribe(value => this.ships = value);
     this.dictionary = this.gameService.fieldChecker.UpdateDictionary(this.ships);
-    this._gameCanBeStarted = false;
+    this.gameCanBeStarted = false;
 
     if (!this.gameService.fieldChecker.CheckArrangement(this.ships)) {
       this.message = "Неправильная расстановка";
@@ -36,11 +33,11 @@ export class userState {
     }
 
     if (!this.gameService.fieldChecker.CheckDictionary(this.dictionary)) {
-      this.message = "Неправильное количество кораблей";
+      this.message = "Продолжайте расставлять корабли";
       return;
     }
 
-    this._gameCanBeStarted = this.gameService.currentStage == Stages.Preparation;
+    this.gameCanBeStarted = this.gameService.currentStage == Stage.Preparation;
     this.message = "Все готово, можно начинать";
   }
 

@@ -1,7 +1,7 @@
 ﻿import {Ship} from "../Models/Ship";
 import {Cell} from "../Models/Cell";
 import {from} from "linq-to-typescript";
-import {States} from "../Models/States";
+import {State} from "../Models/State";
 
 export class fieldChecker {
 
@@ -25,7 +25,7 @@ export class fieldChecker {
 
   public GetShips(map: Cell[][]): Ship[] {
     let result: Map<Cell, Ship> = new Map<Cell, Ship>();
-    let filledCells = from(map).selectMany(x => from(x)).where(x => x.state == States.HasShip).toArray();
+    let filledCells = from(map).selectMany(x => from(x)).where(x => x.state == State.HasShip).toArray();
     let counter = filledCells.length;
 
     filledCells.forEach(cell => {

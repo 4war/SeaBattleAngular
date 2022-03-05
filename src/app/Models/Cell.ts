@@ -14,7 +14,7 @@ export class Cell {
   side: Side = Side.User;
 
   get stage(): Stage {
-    return this.gameService.currentStage;
+    return this.gameService.stage;
   }
 
   constructor(x: number, y: number, private battleField: BattleField, private gameService: GameService) {
@@ -44,8 +44,10 @@ export class Cell {
       }
 
       case Stage.Fight: {
-        if (this.state == State.HasShip) {
+        if (this.gameService.move == Move.AI)
+          return;
 
+        if (this.state == State.HasShip) {
           this.state = State.Destroyed;
           this.battleField.hit(this);
         } else {

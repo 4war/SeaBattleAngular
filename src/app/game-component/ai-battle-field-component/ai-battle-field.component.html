@@ -1,7 +1,7 @@
 <div class="center-custom">
   <table class="table-custom">
-    <tr *ngFor="let row of battleField.map">
-      <td *ngFor="let cell of row">
+    <tr *ngFor="let row of battleField.map" class="battlefield-border">
+      <td *ngFor="let cell of row" class="battlefield-border">
         <app-cell-component [cell]="cell" [side]="side" (onClick)="update()"></app-cell-component>
       </td>
     </tr>

@@ -4,7 +4,6 @@ import {CellStyles} from "../../CellStyles";
 import {State} from "../../Models/State";
 import {Side} from "../../Models/Side";
 import {GameService} from "../../services/game.service";
-import {Stage} from "../../Models/Stage";
 
 @Component({
   selector: 'app-cell-component',
@@ -31,7 +30,10 @@ export class CellComponent implements OnInit {
     if (this.cell.selected)
       return CellStyles.get(this.cell.side)!.get(State.Selected)!;
 
-    if (this.cell.side == Side.Ai && this.cell.state == State.Unavailable && !this.cell.visible)
+    if (this.cell.state == State.Unavailable && !this.cell.visible)
+      return CellStyles.get(this.cell.side)!.get(State.Clear)!;
+
+    if (this.cell.state == State.HasShip && this.cell.side == Side.Ai && !this.cell.visible)
       return CellStyles.get(this.cell.side)!.get(State.Clear)!;
 
     return CellStyles.get(this.cell.side)!.get(this.cell.state)!;

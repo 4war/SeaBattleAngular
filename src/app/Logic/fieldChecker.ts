@@ -27,7 +27,8 @@ export class fieldChecker {
 
   public GetShips(map: Cell[][]): Ship[] {
     let result: Map<Cell, Ship> = new Map<Cell, Ship>();
-    let filledCells = from(map).selectMany(x => from(x)).where(x => x.state == State.HasShip).toArray();
+    let filledCells = from(map).selectMany(x => from(x))
+      .where(x => x.state == State.HasShip || x.state == State.Destroyed).toArray();
     let counter = filledCells.length;
 
     filledCells.forEach(cell => {

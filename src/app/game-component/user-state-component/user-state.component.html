@@ -1,7 +1,7 @@
-<div class="message-custom white">{{reserve.message}}</div>
-<div class="reserve-list white">
-  <span class="ship-line white" *ngFor="let kvp of gameService.currentRules.quantities | keyvalue">
-      <span class="ship-counter"
+<div class="message-custom white text-shadow-custom">{{reserve.message}}</div>
+<div class="reserve-list">
+  <span class="ship-line" *ngFor="let kvp of gameService.currentRules.quantities | keyvalue">
+      <span class="ship-counter text-shadow-custom"
             [ngClass]="reserve.dictionary.get(kvp.key)!.length == kvp.value? 'green': 'red'">
         {{reserve.dictionary.get(kvp.key)!.length}}/{{kvp.value}}</span>
       <span class="ship-block-chain" *ngFor="let a of [].constructor(kvp.key)">

@@ -47,11 +47,17 @@ export class Cell {
         if (this.gameService.move == Move.AI)
           return;
 
+        if (this.side == Side.User)
+          return;
+
+        if (this.visible || this.state == State.Destroyed)
+          return;
+
         if (this.state == State.HasShip) {
           this.state = State.Destroyed;
           this.battleField.hit(this);
         } else {
-          this.state = State.Shot;
+          this.state = State.Unavailable;
           this.battleField.miss(this);
         }
         break;
@@ -73,7 +79,7 @@ export class Cell {
       }
       case Stage.Fight: {
         if (this.side == Side.Ai && this.gameService.move == Move.User) {
-          if (this.state != State.Shot && this.state != State.Destroyed) {
+          if (!this.visible && this.state != State.Destroyed) {
             this.selected = true;
           }
         }

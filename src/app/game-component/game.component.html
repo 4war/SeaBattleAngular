@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="row battlefield">
     <app-user-battle-field-component
-      [ngClass]="gameService.move == gameService.moveType.AI && gameService.stage == gameService.stageType.Fight ? 'outline-glow': ''"
+      [ngClass]="gameService.move == gameService.moveType.AI && gameService.stage == gameService.stageType.Fight ? 'outline-glow-user': ''"
       class="col battlefield-user" (onUpdate)="update()">
     </app-user-battle-field-component>
 
     <app-ai-battle-field-component
-      [ngClass]="gameService.move == gameService.moveType.User && gameService.stage == gameService.stageType.Fight ? 'outline-glow': ''"
+      [ngClass]="gameService.move == gameService.moveType.User && gameService.stage == gameService.stageType.Fight ? 'outline-glow-enemy': ''"
       class="col battlefield-enemy" (onEnemyUpdate)="update()">
     </app-ai-battle-field-component>
 
@@ -16,5 +16,4 @@
     <app-ai-state-component class="col state-enemy"></app-ai-state-component>
   </div>
 </div>
-
 

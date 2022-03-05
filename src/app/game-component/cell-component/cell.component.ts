@@ -4,17 +4,24 @@ import {CellStyles} from "../../CellStyles";
 import {State} from "../../Models/State";
 import {Side} from "../../Models/Side";
 import {GameService} from "../../services/game.service";
+import {Stage} from "../../Models/Stage";
 
 @Component({
   selector: 'app-cell-component',
   templateUrl: './cell.component.html',
-  styleUrls: ['./cell.component.css']
+  styleUrls: ['./cell.component.css', '../game.component.css']
 })
 
 
 export class CellComponent implements OnInit {
 
+  get sideType(): typeof Side {
+    return Side;
+  }
+
   @Output() onClick: EventEmitter<Cell> = new EventEmitter<Cell>();
+
+  shouldGlow = false;
 
   constructor(private gameService: GameService) {
   }
@@ -41,10 +48,12 @@ export class CellComponent implements OnInit {
 
   selectCell(): void {
     this.cell.select();
+    this.shouldGlow = true;
   }
 
   deselectCell(): void{
     this.cell.deselect();
+    this.shouldGlow = false;
   }
 
   confirmClick(): void {

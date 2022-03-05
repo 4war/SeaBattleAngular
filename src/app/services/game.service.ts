@@ -94,11 +94,11 @@ export class GameService {
 
   startGame() {
     this.aiBattleField.arrangeAutomatically();
-    this.userReserve.update();
-    this.aiReserve.update();
     this.userBattleField.hideMap();
     this.aiBattleField.hideMap();
     this.stage = Stage.Fight;
+    this.userReserve.update();
+    this.aiReserve.update();
   }
 
   endGame(side: Side) {
@@ -108,8 +108,10 @@ export class GameService {
   }
 
   restartGame() {
+    this.aiBattleField.forgetArrangement();
     this.aiBattleField.clearMap();
     this.aiBattleField.autoFighter.reset();
+    this.userBattleField.forgetArrangement();
     this.userBattleField.clearMap();
     this.userBattleField.autoFighter.reset();
     this.stage = Stage.Preparation;

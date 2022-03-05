@@ -55,7 +55,8 @@ export class BattleField {
 
   miss(cell: Cell) {
     this.gameService.changeMove();
-    this.map[cell.y][cell.x].state = State.Shot;
+    this.map[cell.y][cell.x].state = State.Unavailable;
+    this.map[cell.y][cell.x].visible = true;
   }
 
   fillMap(): Cell[][] {
@@ -81,6 +82,10 @@ export class BattleField {
         cell.selected = false;
       }
     }
+  }
+
+  forgetArrangement(){
+    this.arrangement = [];
   }
 
   arrangeAutomatically(): void {

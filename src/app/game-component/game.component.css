@@ -13,8 +13,12 @@
   background-color: #e44749;
 }
 
-.outline-glow{
-  box-shadow: 0px 0px 100px 10px #66bb6a;
+.outline-glow-enemy{
+  box-shadow: 0px 0px 100px 10px #000000;
+}
+
+.outline-glow-user{
+  box-shadow: 0px 0px 100px 10px #000000;
 }
 
 .state{
@@ -106,4 +110,8 @@
 
 .white{
   color: #e1e5e8;
+}
+
+.text-shadow-custom{
+  text-shadow: #000000 1px 0 2px;
 }

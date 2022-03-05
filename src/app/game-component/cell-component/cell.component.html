@@ -1,4 +1,8 @@
-<button class="cell-custom" style="background-image: url({{this.getBgImageUrl()}})"
+<button
+  [ngClass]="side == sideType.Ai
+  ? (shouldGlow ?  'cell-highlight-enemy' : '')
+  : (shouldGlow ?  'cell-highlight-user' : '')"
+  class="cell-custom" style="background-image: url({{this.getBgImageUrl()}})"
         (mouseenter)="selectCell()"
         (mouseleave)="deselectCell()"
         (click)="confirmClick()">

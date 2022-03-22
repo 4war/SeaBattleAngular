@@ -13,7 +13,6 @@
   <button *ngIf="gameService.stage == gameService.stageType.Preparation" class="randomise white" (click)="randomise()">Random</button>
   <button *ngIf="reserve.gameCanBeStarted" (click)="startGame()" class="confirm white">Start</button>
   <button *ngIf="reserve.restartVisible" (click)="restartGame()" class="confirm white">Restart</button>
-
 </div>
 
 

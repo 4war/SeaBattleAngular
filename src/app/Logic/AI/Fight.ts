@@ -45,7 +45,7 @@ export class Fight {
     return this.getRandomCellFromList(randomList);
   }
 
-  private tryToFinishShip(ship: Ship): Cell{
+  private tryToFinishShip(ship: Ship): Cell {
     let orientation = this.getOrientation(ship);
     if (orientation == Orientation.Horizontal) {
       return this.tryToFinishShipHorizontally(ship)!;
@@ -68,8 +68,13 @@ export class Fight {
 
   private tryToFinishShipHorizontally(ship: Ship): Cell | null {
     let knownCells = from(ship.cells).where(c => c.state == State.Destroyed).toArray();
-    let first = from(knownCells).first(cell => cell.x == (from(knownCells).min(c => c.x)))
-    let last = from(knownCells).first(cell => cell.x == (from(knownCells).max(c => c.x)))
+    let xArray = from(knownCells).select(cell => cell.x).toArray();
+    let min = from(xArray).min();
+    if (from(xArray).any(x => x == 0))
+      min = 0;
+
+    let first = from(knownCells).first(cell => cell.x == min);
+    let last = from(knownCells).first(cell => cell.x == (from(knownCells).max(c => c.x)));
     let distance = last.x - first.x - 1;
 
     if (knownCells.length < distance + 2) {
@@ -95,7 +100,12 @@ export class Fight {
 
   private tryToFinishShipVertically(ship: Ship): Cell | null {
     let knownCells = from(ship.cells).where(c => c.state == State.Destroyed).toArray();
-    let first = from(knownCells).first(cell => cell.y == (from(knownCells).min(c => c.y)))
+    let yArray = from(knownCells).select(cell => cell.y).toArray();
+    let min = from(yArray).min();
+    if (from(yArray).any(x => x == 0))
+      min = 0;
+
+    let first = from(knownCells).first(cell => cell.y == min)
     let last = from(knownCells).first(cell => cell.y == (from(knownCells).max(c => c.y)))
     let distance = last.y - first.y - 1;
 

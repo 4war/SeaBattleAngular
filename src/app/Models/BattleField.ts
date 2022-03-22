@@ -51,6 +51,7 @@ export class BattleField {
     if (from(this.arrangement).all(s => s.destroyed)) {
       this.gameService.endGame(this.side);
     }
+
   }
 
   miss(cell: Cell) {

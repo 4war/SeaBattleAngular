@@ -127,6 +127,10 @@ export class Preparation {
     throw new ArgumentOutOfRangeException('Не удалось поставить корабль с 10 раз');
   }
 
+  public confirmArrangement(){
+    this.battleField.arrangement.forEach(ship => this.updateMapAfterShip(ship));
+  }
+
   private updateMapAfterShip(newShip: Ship): void {
     newShip.cells.forEach(cell => this.battleField.map[cell.y][cell.x].state = State.HasShip);
     let first = from(newShip.cells).first();
